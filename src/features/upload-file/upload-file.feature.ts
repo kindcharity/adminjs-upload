@@ -15,7 +15,7 @@ import { updateRecordFactory } from './factories/update-record-factory'
 import { fillRecordWithPath } from './utils/fill-record-with-path'
 import { deleteFileFactory } from './factories/delete-file-factory'
 import { deleteFilesFactory } from './factories/delete-files-factory'
-//import { stripPayloadFactory } from './factories/strip-payload-factory'
+import { stripPayloadFactory } from './factories/strip-payload-factory'
 
 export type ProviderOptions = Required<Exclude<UploadOptions['provider'], BaseProvider>>
 
@@ -43,7 +43,7 @@ const uploadFileFeature = (config: UploadOptions): FeatureType => {
     throw new Error(ERROR_MESSAGES.NO_KEY_PROPERTY)
   }
 
-  //const stripFileFromPayload = stripPayloadFactory(configWithDefault)
+  const stripFileFromPayload = stripPayloadFactory(configWithDefault)
   const updateRecord = updateRecordFactory(configWithDefault, provider)
   const deleteFile = deleteFileFactory(configWithDefault, provider)
   const deleteFiles = deleteFilesFactory(configWithDefault, provider)
@@ -106,10 +106,10 @@ const uploadFileFeature = (config: UploadOptions): FeatureType => {
         after: fillPath,
       },
       new: {
-        //before: stripFileFromPayload,
+        before: stripFileFromPayload,
         after: [updateRecord, fillPath] },
       edit: {
-        //before: [stripFileFromPayload],
+        before: [stripFileFromPayload],
         after: [updateRecord, fillPath],
       },
       delete: {

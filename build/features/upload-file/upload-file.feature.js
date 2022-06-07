@@ -26,6 +26,7 @@ const update_record_factory_1 = require("./factories/update-record-factory");
 const fill_record_with_path_1 = require("./utils/fill-record-with-path");
 const delete_file_factory_1 = require("./factories/delete-file-factory");
 const delete_files_factory_1 = require("./factories/delete-files-factory");
+const strip_payload_factory_1 = require("./factories/strip-payload-factory");
 const DEFAULT_FILE_PROPERTY = 'file';
 const DEFAULT_FILE_PATH_PROPERTY = 'filePath';
 const DEFAULT_FILES_TO_DELETE_PROPERTY = 'filesToDelete';
@@ -38,7 +39,7 @@ const uploadFileFeature = (config) => {
     if (!properties.key) {
         throw new Error(constants_1.ERROR_MESSAGES.NO_KEY_PROPERTY);
     }
-    //const stripFileFromPayload = stripPayloadFactory(configWithDefault)
+    const stripFileFromPayload = strip_payload_factory_1.stripPayloadFactory(configWithDefault);
     const updateRecord = update_record_factory_1.updateRecordFactory(configWithDefault, provider);
     const deleteFile = delete_file_factory_1.deleteFileFactory(configWithDefault, provider);
     const deleteFiles = delete_files_factory_1.deleteFilesFactory(configWithDefault, provider);
@@ -81,11 +82,11 @@ const uploadFileFeature = (config) => {
                 after: fillPath,
             },
             new: {
-                //before: stripFileFromPayload,
+                before: stripFileFromPayload,
                 after: [updateRecord, fillPath]
             },
             edit: {
-                //before: [stripFileFromPayload],
+                before: [stripFileFromPayload],
                 after: [updateRecord, fillPath],
             },
             delete: {
