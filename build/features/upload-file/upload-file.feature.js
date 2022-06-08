@@ -82,11 +82,11 @@ const uploadFileFeature = (config) => {
                 after: fillPath,
             },
             new: {
-                before: stripFileFromPayload,
+                //before: stripFileFromPayload,
                 after: [updateRecord, fillPath]
             },
             edit: {
-                before: [stripFileFromPayload],
+                //before: [stripFileFromPayload],
                 after: [updateRecord, fillPath],
             },
             delete: {

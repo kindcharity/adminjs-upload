@@ -49,7 +49,7 @@ export const stripPayloadFactory = (
 
       const duplicatedOccurrences = validatePropertiesGlobally(data.__invocations)
       if (duplicatedOccurrences) {
-        //throw new Error(ERROR_MESSAGES.DUPLICATED_KEYS(duplicatedOccurrences))
+        throw new Error(ERROR_MESSAGES.DUPLICATED_KEYS(duplicatedOccurrences))
       }
 
       return {

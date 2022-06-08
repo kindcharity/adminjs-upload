@@ -20,7 +20,7 @@ exports.stripPayloadFactory = (uploadOptionsWithDefault) => {
             filteredPayload = adminjs_1.flat.filterOutParams(filteredPayload, properties.filePath);
             const duplicatedOccurrences = validate_properties_1.validatePropertiesGlobally(data.__invocations);
             if (duplicatedOccurrences) {
-                //throw new Error(ERROR_MESSAGES.DUPLICATED_KEYS(duplicatedOccurrences))
+                throw new Error(constants_1.ERROR_MESSAGES.DUPLICATED_KEYS(duplicatedOccurrences));
             }
             return Object.assign(Object.assign({}, request), { payload: filteredPayload });
         }
