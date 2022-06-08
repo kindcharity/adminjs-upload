@@ -106,8 +106,11 @@ const uploadFileFeature = (config: UploadOptions): FeatureType => {
         after: fillPath,
       },
       new: {
-        after: [updateRecord, fillPath] },
+        before: stripFileFromPayload,
+        after: [updateRecord, fillPath]
+      },
       edit: {
+        before: [stripFileFromPayload],
         after: [updateRecord, fillPath],
       },
       delete: {
